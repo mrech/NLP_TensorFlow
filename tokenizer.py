@@ -24,18 +24,21 @@ for item in data:
     labels.append(item['is_sarcastic'])
     urls.append(item['article_link'])
 
-# out of vocabulary words indexed as <OOV>
+# out of vocabulary words token <OOV>
+# Tokenizer object used to tokenize sentences
 tokenizer = Tokenizer(oov_token="<OOV>")
+# Tokenize a list of sentences
 tokenizer.fit_on_texts(sentences)
 
 word_index = tokenizer.word_index
 # unique words
 len(word_index)
 
-# Transform text to sequence of index
+# Encode a list os sentences to use the tokens
 sequences = tokenizer.texts_to_sequences(sentences)
 
-# Add  0s at the end of sequence to match the array length
+# Add  0s at the end of sequence to match the length of the
+# longest seqeunce
 padded = pad_sequences(sequences, padding='post')
 
 padded.shape
